@@ -1,6 +1,8 @@
 
 from Conexion.conexion import DAO
 import opciones
+from mysql.connector import Error
+
 #Vamos a hacer un Crud con Python
 
 def menuPrincipal():
@@ -36,19 +38,21 @@ def llamarOpcionCorrecta(opcion):
     if opcion ==1:
         try:
             peliculas=dao.listaPeliculas()
+            
             if len(peliculas) >0:
                 opciones.listarPeliculas(peliculas)
             else:
                 print ("No se encontraron cursos")      
         except:
-            print ("Ocurrio un error")    
+            print ("Ocurrio un error en opcion 1")    
         
     elif opcion ==2:
-        pelicula =None
+        pelicula =opciones.pedirDatosPelicula()
+        
         try:
             dao.altaPelicula(pelicula)
-        except:
-            print ("Ocurrio un error")
+        except Error as err:
+            print ("Ocurrio un error al dar de alta la pelicula {0}".format(err))
         
     elif opcion ==3:
         print ("Es la opcion 3")
