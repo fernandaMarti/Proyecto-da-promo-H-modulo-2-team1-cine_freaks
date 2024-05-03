@@ -1,0 +1,45 @@
+import mysql.connector
+from mysql.connector import Error
+
+class DAO:
+    
+    def __init__(self):
+        try:
+         self.conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',database='cinemextract',port='3306')
+         
+         print(self.conexion)
+        
+        except Error as ex:
+            print("Error al intentar la conexión con la base de datos {0}".format(ex))
+            print("Error al intentar realizar la consulta: {0}".format(ex))
+                   
+    
+    def listaPeliculas(self):
+        if self.conexion.is_connected():
+            try:
+                cursor =self.conexion.cursor()
+                cursor.execute("SELECT * FROM moviesdataset ORDER BY id_pelicula ASC")
+                resultados=cursor.fetchall()
+                print (resultados)
+                return resultados
+                
+            except Error as ex:
+                               
+                print("Error al intentar realizar la consulta: {0}".format(ex))
+                
+    def altaPelicula(self,pelicula):
+        if self.conexion.is_connected():
+            try:
+                cursor =self.conexion.cursor()
+                sql="INSERT INTO moviesdataset (id_pelicula, titulo_pelicula, tipo_pelicula, genero_pelicula, anno_estreno, mes_estreno) VALUES ('{1}','{2}','{3}','{4}','{5}','{6}')"
+                cursor.execute(sql.format(pelicula[1],pelicula[2],pelicula[3],pelicula[4],pelicula[5],pelicula[6],pelicula[7]))
+                self.conexion.commit()
+                print ("Película dada de alta correctamente")
+            
+                
+            except Error as ex:
+                               
+                print("Error al intentar realizar la consulta: {0}".format(ex))
+        
+
+    
