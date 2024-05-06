@@ -1,7 +1,7 @@
 
 from Conexion.conexion import DAO
 import opciones
-from mysql import Error
+from mysql.connector.errors import Error
 
 #Vamos a hacer un Crud con Python
 
