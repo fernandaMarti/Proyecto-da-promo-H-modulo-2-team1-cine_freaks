@@ -14,18 +14,21 @@ def menuPrincipal():
         while not opcionCorrecta:
             
             print("===========================    Menú    ==============================")
+            
             print("1. Ver peliculas")
             print("2. Alta Pelicula")
             print("3. Editar Pelicula")
             print("4. Eliminar Pelicula")
-            print("5. Salir")
+            print("5. Consultas SQL")
+            print("6. Cargar Peliculas API")
+            print("7. Salir")
             
-            opcion= int(input("Elige una opción"))
+            opcion= int(input("Elige una opción:  "))
             
-            if opcion <1 or opcion >5:
+            if opcion <1 or opcion >7:
                  print("La opción introducida no esta disponible")
             
-            elif opcion ==5:
+            elif opcion ==7:
                 continuar=False
                 print ("Muchas gracias por utilizar nuestra aplicacion")
                 break
@@ -38,9 +41,10 @@ def llamarOpcionCorrecta(opcion):
     if opcion ==1:
         try:
             peliculas=dao.listaPeliculas()
-            
+          
             if len(peliculas) >0:
                 opciones.listarPeliculas(peliculas)
+               
             else:
                 print ("No se encontraron peliculas")      
         except:
@@ -68,10 +72,8 @@ def llamarOpcionCorrecta(opcion):
         except Error as err:
             
             print ("Ocurrio un error al intentar eliminar la pelicula {0}".format(err))
-        
-        
-        
-        
+          
+  
     elif opcion ==4:
         try:
             peliculas=dao.listaPeliculas()
@@ -88,6 +90,53 @@ def llamarOpcionCorrecta(opcion):
             print ("Ocurrio un error al intentar eliminar la pelicula {0}".format(err))
         
     elif opcion ==5:
+       
+        print("CONSULTAS SQL")
+        print("")
+        print('1. ¿Qué géneros han recibido más premios Óscar?')
+        print('2. ¿Qué género es el mejor valorado en IMDB?')
+        print('3. ¿En que año se estrenaron más películas?')
+        print('4. ¿En que año se estrenaron mas cortos?')
+        print('5. ¿Cuál es la mejor serie valorada en IMDB?')
+        print('6. ¿Cuál es la película mejor valorada en IMDB?')
+        print('7. ¿Qué actor/actriz ha recibido más premios?')
+        print('8. ¿Hay algun actor/actriz que haya recibido más de un premio Óscar?')
+        print('9. Volver al menú')
+        print("")
+       
+        
+        consulta= input("Elige una consulta a realizar:")
+            
+        if consulta ==1:
+            pass
+            
+        elif consulta==2:
+            pass
+        elif consulta==3:
+            pass
+        elif consulta==4:
+            pass
+        elif consulta==5:
+            pass
+        elif consulta==6:
+            pass
+        elif consulta==7:
+            pass
+        elif consulta==8:
+            pass
+            
+        else:
+            menuPrincipal()
+       
+   
+    elif opcion ==6:
+       try:
+            pass
+       except Error as err:
+            
+            print ("Ocurrio un error al intentar eliminar la pelicula {0}".format(err))
+    
+    elif opcion ==7:
         quit
     else:
         pass

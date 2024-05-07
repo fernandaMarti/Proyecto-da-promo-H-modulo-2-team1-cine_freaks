@@ -78,4 +78,5 @@ class DAO:
                 
                 print("Error al intentar realizar la consulta: {0}".format(ex))
         
-                
+    def llamar_API():
+        pass            
