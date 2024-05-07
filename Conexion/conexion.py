@@ -6,7 +6,7 @@ class DAO:
         try:
          self.conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',database='cinemextract',port='3306')
          
-         print(self.conexion)
+         #print(self.conexion)
         
         except Error as ex:
             print("Error al intentar la conexión con la base de datos {0}".format(ex))
@@ -19,7 +19,6 @@ class DAO:
                 cursor =self.conexion.cursor()
                 cursor.execute("SELECT * FROM moviesdataset ORDER BY id_pelicula ASC")
                 resultados=cursor.fetchall()
-                print (resultados)
                 cursor.close
                 return resultados
                 
@@ -67,7 +66,7 @@ class DAO:
             try:
                 cursor =self.conexion.cursor()
                 
-                sql= "DELETE FROM moviesdataset WHERE id_registro = '{0}' "
+                sql= "DELETE FROM moviesdataset WHERE id_pelicula = '{0}' "
                 
                 cursor.execute(sql.format(codigocodigoPeliEliminar))
                 

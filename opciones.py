@@ -5,15 +5,15 @@ def listarPeliculas(peliculas):
     
     for peli in peliculas:
       
-        datos = "id registro: {0} id pelicula: {1} titulo pelicula {2} tipo pelicula {3} genero pelicula {4} año estreno {5} mes estreno: {6}"
-        print (datos.format(peli[0],peli[1],peli[2],peli[3],peli[4],peli[5],peli[6]))
+        datos = "id pelicula: {0} titulo pelicula {1} tipo pelicula {2} genero pelicula {3} año estreno {4} mes estreno: {5}"
+        print (datos.format(peli[0],peli[1],peli[2],peli[3],peli[4],peli[5]))
        
     print(" ")   
             
 
 def pedirDatosPelicula ():
     print("Introduzca los siguientes datos de la película")
-    id_pelicula=int(input("Codigo de película:  "))
+    id_pelicula=int(input("Id de la película:  "))
     titulo_pelicula=input("Iítulo de la pelicula:  ")
     tipo_pelicula=input("Tipo de película:  ")
     genero_pelicula=input("Género al que pertence la película:  ")
@@ -30,7 +30,7 @@ def pedirDatosPeliModificar(peliculas):
     
     listarPeliculas(peliculas)
     
-    codigoPeliEditar = int(input ("Por favor, introduzca el codigo de la peli a modificar   "))
+    codigoPeliEditar = int(input ("Por favor, introduzca el id_pelicula de la peli a modificar   "))
     
     for peli in peliculas:
         if peli[0] == codigoPeliEditar:

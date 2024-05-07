@@ -42,7 +42,7 @@ def llamarOpcionCorrecta(opcion):
             if len(peliculas) >0:
                 opciones.listarPeliculas(peliculas)
             else:
-                print ("No se encontraron cursos")      
+                print ("No se encontraron peliculas")      
         except:
             print ("Ocurrio un error en opcion 1")    
         
