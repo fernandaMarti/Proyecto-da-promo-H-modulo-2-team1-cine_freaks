@@ -1,9 +1,11 @@
 
 from Conexion.conexion import DAO
+from Conexion.conexion import API
 import opciones
 from mysql.connector.errors import Error
 
 #Vamos a hacer un Crud con Python
+
 
 def menuPrincipal():
     
@@ -19,16 +21,17 @@ def menuPrincipal():
             print("2. Alta Pelicula")
             print("3. Editar Pelicula")
             print("4. Eliminar Pelicula")
-            print("5. Consultas SQL")
-            print("6. Cargar Peliculas API")
-            print("7. Salir")
+            print("5. Crear BBDD")
+            print("6. Consultas SQL")
+            print("7. Cargar Peliculas API")
+            print("8. Salir")
             
             opcion= int(input("Elige una opción:  "))
             
-            if opcion <1 or opcion >7:
+            if opcion <1 or opcion >8:
                  print("La opción introducida no esta disponible")
             
-            elif opcion ==7:
+            elif opcion ==8:
                 continuar=False
                 print ("Muchas gracias por utilizar nuestra aplicacion")
                 break
@@ -90,6 +93,10 @@ def llamarOpcionCorrecta(opcion):
             print ("Ocurrio un error al intentar eliminar la pelicula {0}".format(err))
         
     elif opcion ==5:
+        nombre= input("Introduce el nombre de la base de datos a crear:  ")
+        dao.crear_BBDD(nombre)
+    
+    elif opcion==6:
        
         print("CONSULTAS SQL")
         print("")
@@ -129,14 +136,34 @@ def llamarOpcionCorrecta(opcion):
             menuPrincipal()
        
    
-    elif opcion ==6:
-       try:
-            pass
-       except Error as err:
-            
-            print ("Ocurrio un error al intentar eliminar la pelicula {0}".format(err))
-    
     elif opcion ==7:
+       
+       continuar =True
+       while continuar:
+           
+        url = "https://moviesdatabase.p.rapidapi.com/titles"
+       
+        try:
+           
+            titleType= input("¿Que fichero quieres generar [movie/short]?  ")
+            genere = input ("¿Que género listamos? [Drama,Action,Comedy]?  ")
+           
+            dic_API_Pelis= API.llamar_API(url,titleType,genere)
+            
+            # Llamar a funcion para que lo pase a csv
+            
+            
+            #llamar a funcion que lo meta en la base de datos
+        
+        except Error as err:
+            
+            print ("Ocurrio un error al intentar ejcutar la API".format(err))
+        
+        respuesta= input("¿Quieres cargar más peliculas s/n?")
+        if respuesta == 'n':
+            continuar =False
+    
+    elif opcion ==8:
         quit
     else:
         pass
