@@ -51,3 +51,11 @@
 </br>
 </br>
 <img width="141" alt="tituloesquema" src="https://github.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/assets/99440874/62805399-ecaf-4d19-a50f-7bbb4c8814b9">
+</br>
+</br>
+
+<img width="499" alt="tablas_esquema" src="https://github.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/assets/99440874/6c1ed3a3-8959-44c7-a3e9-3bde585332c9">
+
+
+
+
