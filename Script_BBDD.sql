@@ -52,7 +52,7 @@ FOREIGN KEY (id_pelicula) REFERENCES MoviesDataset (id_pelicula)
 
 CREATE TABLE int_pelis_actores (
 id_actor INT
-id_pelicula VARCHAR(20)
+id_pelicula VARCHAR,20),
 PRIMARY KEY (id_actor,id_pelicula),
 FOREIGN KEY (id_actor) REFERENCES actores (id_actor),
 FOREIGN KEY (id_pelicula ) REFERENCES MoviesDataset (id_pelicula)  
