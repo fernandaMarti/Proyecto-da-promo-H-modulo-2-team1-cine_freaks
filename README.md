@@ -71,4 +71,4 @@ Slack</br>
 
 <h2>Documentación</h1>
 La documentación se puede encontrar a lo largo de este repositorio</br>
-  <a href=>Enunciado proyecto</a></br>
+  <a href="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Estructura_BBDD.md">Estructura de la BBDD</a></br>
