@@ -18,7 +18,7 @@
 
   id_oscar INT PK </br>
   genero_pelicula VARCHAR (45) </br>
-  fecha_ceremonia DATE </br>
+  fecha_ceremonia INT </br>
   mejor_pelicula VARCHAR (255) </br>
   mejor_director VARCHAR (100) </br>
   mejor_actor VARCHAR (100) </br>
