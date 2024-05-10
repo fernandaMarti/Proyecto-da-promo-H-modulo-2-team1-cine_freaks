@@ -11,33 +11,32 @@ tipo_pelicula VARCHAR (45),
 genero_pelicula VARCHAR (45),
 anno_estreno INT,
 mes_estreno VARCHAR (45),
-PRIMARY KEY (id_registro)
+PRIMARY KEY (id_pelicula)
 );
 
-CREATE TABLE premios (
-id_premio INT AUTO_INCREMENT NOT NULL,
+CREATE TABLE oscars (
+id_ceremonia INT NOT NULL,
 genero_pelicula VARCHAR (45),
-fecha_ceremonia DATE,
+fecha_ceremonia INT,
 mejor_pelicula VARCHAR (255),
 mejor_director VARCHAR (100),
 mejor_actor VARCHAR (100),
 mejor_actriz VARCHAR (100),
-PRIMARY KEY (id_premio),
-
+PRIMARY KEY (id_ceremonia)
 );
 
 CREATE TABLE actores (
-id_actor INT,
+id_actor INT NOT NULL,
 nombre_actor VARCHAR (100),
 anno_nacimiento INT,
 conocido VARCHAR (45),
 que_hace VARCHAR (45),
-premios INT,
-
+premios INT
+PRIMARY KEY (id_actor)
 );
 
 CREATE TABLE detalles_peliculas (
-id_detalle_peli INT AUTO_INCREMENT NOT NULL,
+id_detalle_peli INT NOT NULL,
 id_pelicula VARCHAR(20)
 nombre_pelicula VARCHAR (100),
 genero_pelicula VARCHAR (45),
