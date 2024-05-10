@@ -7,16 +7,16 @@
 
 ### MoviesDataset
 
-  id_pelicula VARCHAR(15) PK </br>
+  id_pelicula VARCHAR(20) PK </br>
   titulo_pelicula VARCHAR (100) </br>
   tipo_pelicula VARCHAR (45) </br>
   genero_pelicula VARCHAR (45) </br>
-  anno_estreno VARCHAR(45) </br>
+  anno_estreno INT </br>
   mes_estreno VARCHAR (45) </br>
 
 ### Oscars
 
-  id_oscar INT PK </br>
+  id_ceremonia INT PK </br>
   genero_pelicula VARCHAR (45) </br>
   fecha_ceremonia INT </br>
   mejor_pelicula VARCHAR (255) </br>
@@ -35,9 +35,10 @@
 
 ## Detalles Pelicula
 
-  id_detalle INT PK </br>
-  id_pelicula VARCHAR(15) FK </br>
+  id_detalle_peli INT PK </br>
+  id_pelicula VARCHAR(20) FK </br>
   nombre_pelicula VARCHAR (100) </br>
+  genero_pelicula VARCHAR (45) </br>
   argumento VARCHAR (2000) </br>
   duracion VARCHAR (45) </br>
   guionistas VARCHAR(255) </br>
@@ -45,7 +46,11 @@
   puntuacion_imdb VARCHAR (45) </br>
   puntuacion_rotten VARCHAR (45) </br>
 
+## Tabla Intermedia Actores/peliculas
 
+id_actor INT FK </br>
+id_pelicula VARCHAR(20) FK </br>
+id_actor,id_pelicula PK </br>
 
 
 </br>
@@ -54,7 +59,8 @@
 </br>
 </br>
 
-<img width="499" alt="tablas_esquema" src="https://github.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/assets/99440874/6c1ed3a3-8959-44c7-a3e9-3bde585332c9">
+
+<img width="472" alt="tablas_esquema" src="https://github.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/assets/99440874/c7f9d47f-2e51-4209-8059-e222d3ccca5f">
 
 
 
