@@ -31,13 +31,13 @@ nombre_actor VARCHAR (100),
 anno_nacimiento INT,
 conocido VARCHAR (45),
 que_hace VARCHAR (45),
-premios INT
+premios INT,
 PRIMARY KEY (id_actor)
 );
 
 CREATE TABLE detalles_peliculas (
 id_detalle_peli INT NOT NULL,
-id_pelicula VARCHAR(20)
+id_pelicula VARCHAR(20),
 nombre_pelicula VARCHAR (100),
 genero_pelicula VARCHAR (45),
 argumento VARCHAR (2000),
@@ -52,7 +52,7 @@ FOREIGN KEY (id_pelicula) REFERENCES MoviesDataset (id_pelicula)
 
 CREATE TABLE int_pelis_actores (
 id_actor INT
-id_pelicula VAARCHAR(20)
+id_pelicula VARCHAR(20)
 PRIMARY KEY (id_actor,id_pelicula),
 FOREIGN KEY (id_actor) REFERENCES actores (id_actor),
 FOREIGN KEY (id_pelicula ) REFERENCES MoviesDataset (id_pelicula)  
