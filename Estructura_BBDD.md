@@ -7,43 +7,43 @@
 
 ### MoviesDataset
 
-id_pelicula VARCHAR(15) PK
-titulo_pelicula VARCHAR (100)
-tipo_pelicula VARCHAR (45)
-genero_pelicula VARCHAR (45)
-anno_estreno VARCHAR(45)
-mes_estreno VARCHAR (45)
+  id_pelicula VARCHAR(15) PK </br>
+  titulo_pelicula VARCHAR (100) </br>
+  tipo_pelicula VARCHAR (45) </br>
+  genero_pelicula VARCHAR (45) </br>
+  anno_estreno VARCHAR(45) </br>
+  mes_estreno VARCHAR (45) </br>
 
 ### Oscars
 
-id_oscar INT PK
-genero_pelicula VARCHAR (45)
-fecha_ceremonia DATE
-mejor_pelicula VARCHAR (255)
-mejor_director VARCHAR (100)
-mejor_actor VARCHAR (100)
-mejor_actriz VARCHAR (100)
+  id_oscar INT PK </br>
+  genero_pelicula VARCHAR (45) </br>
+  fecha_ceremonia DATE </br>
+  mejor_pelicula VARCHAR (255) </br>
+  mejor_director VARCHAR (100) </br>
+  mejor_actor VARCHAR (100) </br>
+  mejor_actriz VARCHAR (100) </br>
 
 ### Actores
 
-id_actor INT PK
-nombre_actor VARCHAR (100)
-anno_nacimiento INT
-conocido VARCHAR (45)
-que_hace VARCHAR (45)
-premios INT
+  id_actor INT PK </br>
+  nombre_actor VARCHAR (100) </br>
+  anno_nacimiento INT </br>
+  conocido VARCHAR (45) </br>
+  que_hace VARCHAR (45) </br>
+  premios INT </br>
 
 ## Detalles Pelicula
 
-id_detalle INT PK
-id_pelicula VARCHAR(15) FK
-nombre_pelicula VARCHAR (100)
-argumento VARCHAR (2000)
-duracion VARCHAR (45)
-guionistas VARCHAR(255)
-directores VARCHAR (255)
-puntuacion_imdb VARCHAR (45)
-puntuacion_rotten VARCHAR (45)
+  id_detalle INT PK </br>
+  id_pelicula VARCHAR(15) FK </br>
+  nombre_pelicula VARCHAR (100) </br>
+  argumento VARCHAR (2000) </br>
+  duracion VARCHAR (45) </br>
+  guionistas VARCHAR(255) </br>
+  directores VARCHAR (255) </br>
+  puntuacion_imdb VARCHAR (45) </br>
+  puntuacion_rotten VARCHAR (45) </br>
 
 
 
