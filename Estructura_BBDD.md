@@ -7,17 +7,16 @@
 
 ### MoviesDataset
 
-  id_pelicula VARCHAR(20) PK </br>
-  titulo_pelicula VARCHAR (100) </br>
-  tipo_pelicula VARCHAR (45) </br>
-  genero_pelicula VARCHAR (45) </br>
-  anno_estreno INT </br>
-  mes_estreno VARCHAR (45) </br>
+ tipo_pelicula VARCHAR (45) </br>
+ titulo_pelicula VARCHAR (100) </br>
+ anno_estreno INT </br>
+ mes_estreno VARCHAR (45) </br>
+ id_pelicula VARCHAR (20) PK </br>
+ genero_pelicula VARCHAR (45) </br>
 
 ### Oscars
 
   id_ceremonia INT PK </br>
-  genero_pelicula VARCHAR (45) </br>
   fecha_ceremonia INT </br>
   mejor_pelicula VARCHAR (255) </br>
   mejor_director VARCHAR (100) </br>
@@ -37,15 +36,14 @@
 
   id_detalle_peli INT PK </br>
   id_pelicula VARCHAR(20) FK </br>
-  nombre_pelicula VARCHAR (100) </br>
-  genero_pelicula VARCHAR (45) </br>
-  argumento VARCHAR (2000) </br>
-  duracion VARCHAR (45) </br>
-  guionistas VARCHAR(255) </br>
-  directores VARCHAR (255) </br>
   puntuacion_imdb VARCHAR (45) </br>
   puntuacion_rotten VARCHAR (45) </br>
-
+  directores VARCHAR (255) </br>
+  guionistas VARCHAR(255) </br>
+  argumento VARCHAR (2000) </br>
+  duracion VARCHAR (45) </br>
+  nombre_pelicula VARCHAR (100) </br>
+  
 ## Tabla Intermedia Actores/peliculas
 
 id_actor INT FK </br>
