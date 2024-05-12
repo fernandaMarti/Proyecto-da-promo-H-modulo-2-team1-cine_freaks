@@ -25,7 +25,6 @@ mejor_pelicula VARCHAR (255),
 mejor_director VARCHAR (100),
 mejor_actor VARCHAR (100),
 mejor_actriz VARCHAR (100),
-id_ceremonia INT,
 PRIMARY KEY (id_ceremonia)
 );
 
