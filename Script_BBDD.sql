@@ -4,27 +4,33 @@ CREATE SCHEMA CinemExtract;
 
 USE CinemExtract;
 
+##Tupla que viene del CSV (Tipo,Nombre,Anno_estreno,Mes_estreno,Id_peli,Genero)
+  
 CREATE TABLE MoviesDataset (
-id_pelicula VARCHAR (20),
-titulo_pelicula VARCHAR (100),
 tipo_pelicula VARCHAR (45),
-genero_pelicula VARCHAR (45),
+titulo_pelicula VARCHAR (100),
 anno_estreno INT,
 mes_estreno VARCHAR (45),
+id_pelicula VARCHAR (20),
+genero_pelicula VARCHAR (45),
 PRIMARY KEY (id_pelicula)
 );
 
+##Tupla que viene del CSV (indice,Ceremonia,Mejor película,Mejor director,Mejor actor,Mejor actriz)
+
 CREATE TABLE oscars (
 id_ceremonia INT,
-genero_pelicula VARCHAR (45),
 fecha_ceremonia INT,
 mejor_pelicula VARCHAR (255),
 mejor_director VARCHAR (100),
 mejor_actor VARCHAR (100),
 mejor_actriz VARCHAR (100),
+id_ceremonia INT,
 PRIMARY KEY (id_ceremonia)
 );
 
+##Tupla que viene del CSV (indice, nombre_actor,anno_nacimineto, conocido,que_hace,premios)
+  
 CREATE TABLE actores (
 id_actor INT,
 nombre_actor VARCHAR (100),
@@ -35,21 +41,24 @@ premios INT,
 PRIMARY KEY (id_actor)
 );
 
+##Tupla que viene del CSV (indice, Id_peli,Punt_IMDB,Tomatometer,Direccion,Guionistas,Argumento,Duracion,Nombre)
+  
 CREATE TABLE detalles_peliculas (
 id_detalle_peli INT,
 id_pelicula VARCHAR(20),
-nombre_pelicula VARCHAR (100),
-genero_pelicula VARCHAR (45),
-argumento VARCHAR (2000),
-duracion VARCHAR (45),
-guionistas VARCHAR(255),
-directores VARCHAR (255),
 puntuacion_imdb VARCHAR (45),
 puntuacion_rotten VARCHAR (45),
+directores VARCHAR (255),
+guionistas VARCHAR(255),
+argumento VARCHAR (2000),
+duracion VARCHAR (45),
+nombre_pelicula VARCHAR (100),
 PRIMARY KEY (id_detalle_peli),
 FOREIGN KEY (id_pelicula) REFERENCES MoviesDataset (id_pelicula)
 );
 
+##Tabla inermedia para una relación de muchos a muchos.
+  
 CREATE TABLE int_pelis_actores (
 id_actor INT,
 id_pelicula VARCHAR(20),
