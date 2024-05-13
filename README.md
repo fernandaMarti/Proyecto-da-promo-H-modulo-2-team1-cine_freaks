@@ -44,6 +44,9 @@
 
 ![Fases proyecto](https://github.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/assets/99440874/c03afdb9-fcb3-4b61-b460-5ff2395579d0)
 
+
+<img width="409" alt="image" src="https://github.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/assets/162314262/77736279-58cc-4847-a4d0-ddb689cbabe6">
+
 </br>
 
 <h2> Planificación del proyecto</h2>
