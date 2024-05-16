@@ -35,17 +35,19 @@
 <b> Guardar en el repositorio de GitHub todo el código del desarrollo del proyecto.</b></br>
 <b> Extraer datos de distintas fuentes de datos y creación de una Base de Datos.</b></br>
 <b>Tener la extracción de datos, creación de la Base de Datos e insercción de datos automatizada en funciones(obligatorio) y clases(optativo)</b></br>
+</br>
+</br>
 
 <h2> Fases del proyecto</h2>
-Fase 1: Extracción de Datos de API de MoviesDataset </br>
-Fase 2: Extracción de Detalles de Películas con Selenium</br>
-Fase 3: Extracción de Detalles de Actores con Selenium</br>
-Fase 4: Extracción de Tablas de los Premios Oscar con Beautiful Soup</br>
-Fase 5: Creación de una Base de Datos</br>
-Fase 6: Inserción de Datos en la Base de Datos</br>
-Fase 7: Realización de Consultas para Obtener Información</br>
+
+</br>
+
+![Fases proyecto](https://github.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/assets/99440874/c03afdb9-fcb3-4b61-b460-5ff2395579d0)
 
 
+<img width="409" alt="image" src="https://github.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/assets/162314262/77736279-58cc-4847-a4d0-ddb689cbabe6">
+
+</br>
 
 <h2> Planificación del proyecto</h2>
 
@@ -72,4 +74,4 @@ Slack</br>
 
 <h2>Documentación</h1>
 La documentación se puede encontrar a lo largo de este repositorio</br>
-  <a href=>Enunciado proyecto</a></br>
+  <a href="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Estructura_BBDD.md">Estructura de la BBDD</a></br>
