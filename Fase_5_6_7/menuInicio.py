@@ -1,7 +1,6 @@
-
-from Conexion.conexion import DAO
-from Conexion.conexion import API
-import Fase_5_6_7.opciones as opciones
+from conexion import DAO
+from conexion import API
+import opciones as opciones
 from mysql.connector.errors import Error
 import os
 
@@ -116,8 +115,12 @@ def llamarOpcionCorrecta(opcion):
     
     
     elif opcion == 7:
+    
+      nombre= input("Introduce el nombre de la base de datos donde quieres cargar los datos:  ")  
         
-      api.cargar_datos_BBDD()
+      api.cargar_datos_BBDD(nombre)
+      
+      
     
     
     elif opcion==8:

@@ -1,6 +1,7 @@
+#Importamos las librerias necesarias
 import mysql.connector
 from mysql.connector import Error
-#Importamos las librerias necesarias
+from mysql.connector import errorcode
 from bs4 import BeautifulSoup
 import pandas as pd
 import numpy as np
@@ -178,19 +179,89 @@ class DAO:
 
     
 class API:    
-      
- 
-    def cargar_datos_BBDD (self):
+    def __init__(self):
+        try:
+            self.conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',port='3306')
+         
+            #print(self.conexion)
+        
+        except Error as ex:
+            print("Error al intentar la conexión con la base de datos {0}".format(ex))
+            print("Error al intentar realizar la consulta: {0}".format(ex))
+        
+         
+    def cargar_datos_BBDD (self,nombre_BBDD):
+             
+        #Metemos los datos de la fase 1
         
         url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"
         
         data_pelis =pd.read_csv(url)
         
-        data_pelis.info()
+        data_pelis.fillna('N/A', inplace=True)
+        data_pelis['mes_estreno'].fillna('N/A', inplace=True)
+        
+        #data_pelis.info()
              
-        print(data_pelis)
+        #print(data_pelis)
                 
         lista_pelis=[tuple(i) for i in data_pelis.values]
-        print(lista_pelis)
+        #print(lista_pelis)
         
-        df_fase1=pd.DataFrame(lista_pelis)
+        #df_fase1=pd.DataFrame(lista_pelis)
+        
+        if self.conexion.is_connected():
+            
+           mycursor = self.conexion.cursor()
+           
+           # Cambiar a la base de datos especificada
+           self.conexion.database = nombre_BBDD
+            
+           sql = "INSERT INTO moviesdataset (tipo_pelicula, titulo_pelicula, anno_estreno, mes_estreno,id_pelicula,genero_pelicula) VALUES (%s, %s, %s, %s,%s,%s)" 
+
+                           
+           #peliculas el nombre del archivo correspondiente
+           try:
+                mycursor.executemany(sql, lista_pelis)
+                self.conexion.commit()
+                print(mycursor.rowcount,"registros insertados")
+           except mysql.connector.Error as err:
+                print("Ha habido un error en la inserción")
+                print(err)
+        
+        #Metemos los datos de la fase 1
+        
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase2.csv"
+        
+        data_detalle_pelis =pd.read_csv(url)
+        
+        #data_detalle_pelis.fillna('N/A', inplace=True)
+        #data_detalle_pelis['mes_estreno'].fillna('N/A', inplace=True)
+        
+        data_detalle_pelis.info()
+             
+        #print(data_pelis)
+                
+        lista_pelis=[tuple(i) for i in data_detalle_pelis.values]
+        #print(lista_pelis)
+        
+        #df_fase1=pd.DataFrame(lista_pelis)
+        
+        if self.conexion.is_connected():
+            
+           mycursor = self.conexion.cursor()
+           
+           # Cambiar a la base de datos especificada
+           self.conexion.database = nombre_BBDD
+            
+           sql = "INSERT INTO detalles_peliculas (id_detalle_peli, id_pelicula,puntuacion_imdb,puntuacion_rotten,directores,guionistas,argumento,duraccion,nombre_pelicula) VALUES (%s, %s, %s, %s,%s,%s, %s, %s,%s)" 
+
+                     
+           #peliculas el nombre del archivo correspondiente
+           try:
+                mycursor.executemany(sql, lista_pelis)
+                self.conexion.commit()
+                print(mycursor.rowcount,"registros insertados")
+           except mysql.connector.Error as err:
+                print("Ha habido un error en la inserción")
+                print(err)
