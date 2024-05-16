@@ -23,6 +23,8 @@ class DAO:
                    
     
     def listaPeliculas(self):
+        
+       
         if self.conexion.is_connected():
             try:
                 cursor =self.conexion.cursor()
@@ -88,10 +90,7 @@ class DAO:
          self.conexion.close()
     
     def crear_BBDD(self,nombre_BBDD):
-        
-          
-         if self.conexion.is_connected():
-             
+                      
             try:
                 cursor =self.conexion.cursor()
                 
@@ -104,9 +103,7 @@ class DAO:
                 self.conexion.commit()
                 
                 print ("Base de datos creado correctamente")
-                
-                self.conexion.database = nombre_BBDD
-                
+                          
             except Error as ex:
                 
                 print("Error al crear la base de datos: {0}".format(ex))
@@ -192,6 +189,10 @@ class API:
          
     def cargar_datos_BBDD (self,nombre_BBDD):
              
+        # Cambiar a la base de datos especificada
+        
+        self.conexion.database = nombre_BBDD
+        
         #Metemos los datos de la fase 1
         
         url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"
@@ -214,8 +215,6 @@ class API:
             
            mycursor = self.conexion.cursor()
            
-           # Cambiar a la base de datos especificada
-           self.conexion.database = nombre_BBDD
             
            sql = "INSERT INTO moviesdataset (tipo_pelicula, titulo_pelicula, anno_estreno, mes_estreno,id_pelicula,genero_pelicula) VALUES (%s, %s, %s, %s,%s,%s)" 
 
@@ -229,7 +228,7 @@ class API:
                 print("Ha habido un error en la inserción")
                 print(err)
         
-        #Metemos los datos de la fase 1
+        '''#Metemos los datos de la fase 2
         
         url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase2.csv"
         
@@ -264,4 +263,4 @@ class API:
                 print(mycursor.rowcount,"registros insertados")
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
-                print(err)
+                print(err) '''

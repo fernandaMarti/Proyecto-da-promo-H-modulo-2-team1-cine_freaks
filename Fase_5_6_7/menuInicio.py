@@ -44,6 +44,7 @@ def llamarOpcionCorrecta(opcion):
     dao = DAO ()
     api = API()
     if opcion ==1:
+        
         try:
             peliculas=dao.listaPeliculas()
           
