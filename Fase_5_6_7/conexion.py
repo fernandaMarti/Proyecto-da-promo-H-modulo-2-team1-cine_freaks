@@ -272,7 +272,7 @@ class API:
         
         
                 
-        '''#Metemos los datos de la fase 3
+        #Metemos los datos de la fase 3
         
         url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/lista_actores_prueba.csv"
         
@@ -299,7 +299,7 @@ class API:
 
            sql = "INSERT INTO actores (nombre_actor, anno_nacimiento, conocido, que_hace, premios) VALUES (%s, %s, %s, %s,%s)" 
 
-                     
+                    
            #insertamos la lista de actores
            try:
                 mycursor.executemany(sql, lista_actores)
@@ -307,7 +307,7 @@ class API:
                 print(mycursor.rowcount,"registros insertados")
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
-                print(err) '''
+                print(err) 
     
         #Metemos los datos de la fase 4
         
