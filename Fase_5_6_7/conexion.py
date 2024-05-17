@@ -228,9 +228,9 @@ class API:
                 print("Ha habido un error en la inserción")
                 print(err)
         
-        '''#Metemos los datos de la fase 2
+        #Metemos los datos de la fase 2
         
-        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase2.csv"
+        url =""
         
         data_detalle_pelis =pd.read_csv(url)
         
