@@ -178,7 +178,14 @@ class DAO:
     
 class API:    
     def __init__(self):
-        pass
+        try:
+            self.conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',port='3306')
+         
+            #print(self.conexion)
+        
+        except Error as ex:
+            print("Error al intentar la conexión con la base de datos {0}".format(ex))
+            print("Error al intentar realizar la consulta: {0}".format(ex))
         
          
     def cargar_datos_BBDD (self,nombre_BBDD):
@@ -265,9 +272,9 @@ class API:
         
         
                 
-        '''#Metemos los datos de la fase 3
+        #Metemos los datos de la fase 3
         
-        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase3.csv"
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/lista_actores_prueba.csv"
         
         data_actores =pd.read_csv(url)
         
@@ -300,7 +307,7 @@ class API:
                 print(mycursor.rowcount,"registros insertados")
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
-                print(err) '''
+                print(err) 
     
         #Metemos los datos de la fase 4
         
@@ -347,11 +354,11 @@ class API:
                 conexion = mysql.connector.connect(user='root', password='tu_contraseña', host='localhost', port='3306', database='tu_base_de_datos')
                 cursor = conexion.cursor()
                 
-                url_actores="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"
+                url_actores="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/lista_actores_prueba.csv"
                 url_peliculas="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"
 
                 # Leer datos de los archivos CSV
-                datos_actores = pd.read_csv(url)leer_csv('actores.csv')
+                datos_actores = pd.read_csv(url)
                 datos_peliculas = pd.read_csv(url)
 
                 # Insertar datos en la tabla intermedia
@@ -373,5 +380,3 @@ class API:
                     cursor.close()
                     conexion.close()
 
-# Llamar a la función para insertar datos en la tabla intermedia
-insertar_datos_tabla_intermedia()
