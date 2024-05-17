@@ -40,10 +40,10 @@ premios INT,
 PRIMARY KEY (id_actor)
 );
 
-##Tupla que viene del CSV (indice, Id_peli,Punt_IMDB,Tomatometer,Direccion,Guionistas,Argumento,Duracion,Nombre)
+##Tupla que viene del CSV (Id_peli,Punt_IMDB,Tomatometer,Direccion,Guionistas,Argumento,Duracion,Nombre)
   
 CREATE TABLE detalles_peliculas (
-id_detalle_peli INT,
+id_detalle_peli INT AUTO_INCREMENT,
 id_pelicula VARCHAR(20),
 puntuacion_imdb VARCHAR (45),
 puntuacion_rotten VARCHAR (45),

@@ -147,7 +147,7 @@ class DAO:
                     print("La tabla detalles_peliculas ya existe en la base de datos.")
                 else:
                     # Crear la tabla si no existe
-                    sql = "CREATE TABLE detalles_peliculas (id_detalle_peli INT, id_pelicula VARCHAR(20), puntuacion_imdb VARCHAR (45), puntuacion_rotten VARCHAR (45), directores VARCHAR (255), guionistas VARCHAR(255), argumento VARCHAR (2000), duracion VARCHAR (45), nombre_pelicula VARCHAR (100), PRIMARY KEY (id_detalle_peli), FOREIGN KEY (id_pelicula) REFERENCES MoviesDataset (id_pelicula))"
+                    sql = "CREATE TABLE detalles_peliculas (id_detalle_peli INT AUTO_INCREMENT, id_pelicula VARCHAR(20), puntuacion_imdb VARCHAR (45), puntuacion_rotten VARCHAR (45), directores VARCHAR (255), guionistas VARCHAR(255), argumento VARCHAR (2000), duracion VARCHAR (45), nombre_pelicula VARCHAR (100), PRIMARY KEY (id_detalle_peli), FOREIGN KEY (id_pelicula) REFERENCES MoviesDataset (id_pelicula))"
                     cursor.execute(sql)
                     self.conexion.commit()
                     print("Tabla detalles_peliculas creada correctamente")
@@ -230,11 +230,11 @@ class API:
         
         #Metemos los datos de la fase 2
         
-        url =""
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase2.csv"
         
         data_detalle_pelis =pd.read_csv(url)
         
-        #data_detalle_pelis.fillna('N/A', inplace=True)
+        data_detalle_pelis.fillna('N/A', inplace=True)
         #data_detalle_pelis['mes_estreno'].fillna('N/A', inplace=True)
         
         data_detalle_pelis.info()
@@ -253,9 +253,9 @@ class API:
            # Cambiar a la base de datos especificada
            self.conexion.database = nombre_BBDD
             
-           sql = "INSERT INTO detalles_peliculas (id_detalle_peli, id_pelicula,puntuacion_imdb,puntuacion_rotten,directores,guionistas,argumento,duraccion,nombre_pelicula) VALUES (%s, %s, %s, %s,%s,%s, %s, %s,%s)" 
+           sql = "INSERT INTO detalles_peliculas (id_pelicula,puntuacion_imdb,puntuacion_rotten,directores,guionistas,argumento,duracion,nombre_pelicula) VALUES (%s, %s, %s, %s,%s,%s, %s, %s)" 
 
-                     
+                    
            #peliculas el nombre del archivo correspondiente
            try:
                 mycursor.executemany(sql, lista_pelis)
@@ -263,7 +263,7 @@ class API:
                 print(mycursor.rowcount,"registros insertados")
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
-                print(err) '''
+                print(err) 
                 
         '''#Metemos los datos de la fase 3
         
