@@ -274,12 +274,13 @@ class API:
                 
         #Metemos los datos de la fase 3
         
-        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/lista_actores_prueba.csv"
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase3.csv"
         
         data_actores =pd.read_csv(url)
         
         #data_actores.fillna('N/A', inplace=True)
-        #data_actores['mes_estreno'].fillna('N/A', inplace=True)
+        data_actores['anno_nacimiento'].fillna(0, inplace=True)
+        data_actores['premios'].fillna(0, inplace=True)
         
         data_actores.info()
              
