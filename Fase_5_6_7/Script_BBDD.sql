@@ -4,7 +4,7 @@ CREATE SCHEMA CinemExtract;
 
 USE CinemExtract;
 
-##Tupla que viene del CSV (Tipo,Nombre,Anno_estreno,Mes_estreno,Id_peli,Genero)
+--Tupla que viene del CSV (Tipo,Nombre,Anno_estreno,Mes_estreno,Id_peli,Genero)
   
 CREATE TABLE MoviesDataset (
 tipo_pelicula VARCHAR (45),
@@ -16,7 +16,7 @@ genero_pelicula VARCHAR (45),
 PRIMARY KEY (id_pelicula)
 );
 
-##Tupla que viene del CSV (indice,Ceremonia,Mejor película,Mejor director,Mejor actor,Mejor actriz)
+--Tupla que viene del CSV (indice,Ceremonia,Mejor película,Mejor director,Mejor actor,Mejor actriz)
 
 CREATE TABLE oscars (
 id_ceremonia INT,
@@ -28,10 +28,10 @@ mejor_actriz VARCHAR (100),
 PRIMARY KEY (id_ceremonia)
 );
 
-##Tupla que viene del CSV (indice, nombre_actor,anno_nacimineto, conocido,que_hace,premios)
+--Tupla que viene del CSV (indice, nombre_actor,anno_nacimineto, conocido,que_hace,premios)
   
 CREATE TABLE actores (
-id_actor INT,
+id_actor INT AUTO_INCREMENT,
 nombre_actor VARCHAR (100),
 anno_nacimiento INT,
 conocido VARCHAR (45),
@@ -40,7 +40,7 @@ premios INT,
 PRIMARY KEY (id_actor)
 );
 
-##Tupla que viene del CSV (Id_peli,Punt_IMDB,Tomatometer,Direccion,Guionistas,Argumento,Duracion,Nombre)
+--Tupla que viene del CSV (Id_peli,Punt_IMDB,Tomatometer,Direccion,Guionistas,Argumento,Duracion,Nombre)
   
 CREATE TABLE detalles_peliculas (
 id_detalle_peli INT AUTO_INCREMENT,
@@ -56,7 +56,7 @@ PRIMARY KEY (id_detalle_peli),
 FOREIGN KEY (id_pelicula) REFERENCES MoviesDataset (id_pelicula)
 );
 
-##Tabla inermedia para una relación de muchos a muchos.
+--Tabla inermedia para una relación de muchos a muchos.
   
 CREATE TABLE int_pelis_actores (
 id_actor INT,

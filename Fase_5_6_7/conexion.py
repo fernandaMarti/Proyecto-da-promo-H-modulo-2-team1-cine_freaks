@@ -139,7 +139,7 @@ class DAO:
                     print("La tabla actores ya existe en la base de datos.")
                 else:
                     # Crear la tabla si no existe
-                    sql = "CREATE TABLE actores (id_actor INT, nombre_actor VARCHAR (100), anno_nacimiento INT, conocido VARCHAR (45), que_hace VARCHAR (45), premios INT, PRIMARY KEY (id_actor))"
+                    sql = "CREATE TABLE actores (id_actor INT AUTO_INCREMENT, nombre_actor VARCHAR (100), anno_nacimiento INT, conocido VARCHAR (45), que_hace VARCHAR (45), premios INT, PRIMARY KEY (id_actor))"
                     cursor.execute(sql)
                     self.conexion.commit()
                     print("Tabla actores creada correctamente")
@@ -194,7 +194,7 @@ class API:
         
         self.conexion.database = nombre_BBDD
         
-        #Metemos los datos de la fase 1
+        ''' #Metemos los datos de la fase 1
         
         url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"
         
@@ -268,7 +268,7 @@ class API:
                 print(err) 
                 
                 
-        # Metemos el codigo para rellenar los datos de la tabla intermedia.
+        # Metemos el codigo para rellenar los datos de la tabla intermedia.'''
         
         
                 
@@ -297,7 +297,7 @@ class API:
            # Cambiar a la base de datos especificada
            self.conexion.database = nombre_BBDD
 
-           sql = "INSERT INTO actores (id_actor, nombre_actor, anno_nacimiento, conocido, que_hace, premios) VALUES (%s, %s, %s, %s,%s,%s)" 
+           sql = "INSERT INTO actores (nombre_actor, anno_nacimiento, conocido, que_hace, premios) VALUES (%s, %s, %s, %s,%s)" 
 
                      
            #insertamos la lista de actores
@@ -309,7 +309,7 @@ class API:
                 print("Ha habido un error en la inserción")
                 print(err) 
     
-        #Metemos los datos de la fase 4
+        '''#Metemos los datos de la fase 4
         
         url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase-4.csv"
         
@@ -344,7 +344,7 @@ class API:
                 print(mycursor.rowcount,"registros insertados")
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
-                print(err) 
+                print(err) '''
                 
         #Rellenamos la tabla intermedia:
         
