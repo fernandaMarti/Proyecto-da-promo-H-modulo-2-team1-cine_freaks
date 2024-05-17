@@ -112,6 +112,7 @@ class DAO:
     # Creamos las tablas
               
     def crear_Tablas(self, nombre_BBDD):
+        
         if self.conexion.is_connected():
             try:
                 cursor = self.conexion.cursor()
@@ -177,14 +178,7 @@ class DAO:
     
 class API:    
     def __init__(self):
-        try:
-            self.conexion =mysql.connector.connect(user = 'root',password='AlumnaAdalab',host='localhost',port='3306')
-         
-            #print(self.conexion)
-        
-        except Error as ex:
-            print("Error al intentar la conexión con la base de datos {0}".format(ex))
-            print("Error al intentar realizar la consulta: {0}".format(ex))
+        pass
         
          
     def cargar_datos_BBDD (self,nombre_BBDD):
@@ -242,6 +236,7 @@ class API:
         #print(data_pelis)
                 
         lista_pelis=[tuple(i) for i in data_detalle_pelis.values]
+        
         #print(lista_pelis)
         
         #df_fase1=pd.DataFrame(lista_pelis)
@@ -264,6 +259,11 @@ class API:
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
                 print(err) 
+                
+                
+        # Metemos el codigo para rellenar los datos de la tabla intermedia.
+        
+        
                 
         '''#Metemos los datos de la fase 3
         
@@ -338,3 +338,40 @@ class API:
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
                 print(err) 
+                
+        #Rellenamos la tabla intermedia:
+        
+        def insertar_datos_tabla_int_pelis_actores():
+            try:
+                # Conexión a la base de datos
+                conexion = mysql.connector.connect(user='root', password='tu_contraseña', host='localhost', port='3306', database='tu_base_de_datos')
+                cursor = conexion.cursor()
+                
+                url_actores="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"
+                url_peliculas="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"
+
+                # Leer datos de los archivos CSV
+                datos_actores = pd.read_csv(url)leer_csv('actores.csv')
+                datos_peliculas = pd.read_csv(url)
+
+                # Insertar datos en la tabla intermedia
+                for dato_actor in datos_actores:
+                    for dato_pelicula in datos_peliculas:
+                        sql_insert = "INSERT INTO int_pelis_actores (id_actor, id_pelicula) VALUES (%s, %s)"
+                        valores = (dato_actor[0], dato_pelicula[4])  # Suponiendo que el ID del actor está en la primera columna y el ID de la película está en la primera columna
+                        cursor.execute(sql_insert, valores)
+
+                conexion.commit()
+                print("Datos insertados correctamente en la tabla intermedia.")
+
+            except Error as e:
+                print("Error al insertar datos en la tabla intermedia:", e)
+                conexion.rollback()
+
+            finally:
+                if conexion.is_connected():
+                    cursor.close()
+                    conexion.close()
+
+# Llamar a la función para insertar datos en la tabla intermedia
+insertar_datos_tabla_intermedia()
