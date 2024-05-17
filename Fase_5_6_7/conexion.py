@@ -264,3 +264,77 @@ class API:
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
                 print(err) '''
+                
+        '''#Metemos los datos de la fase 3
+        
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase3.csv"
+        
+        data_actores =pd.read_csv(url)
+        
+        #data_actores.fillna('N/A', inplace=True)
+        #data_actores['mes_estreno'].fillna('N/A', inplace=True)
+        
+        data_actores.info()
+             
+        #print(data_actores)
+                
+        lista_actores=[tuple(i) for i in data_actores.values]
+        #print(lista_actores)
+        
+        #df_fase3=pd.DataFrame(lista_actores)
+        
+        if self.conexion.is_connected():
+            
+           mycursor = self.conexion.cursor()
+           
+           # Cambiar a la base de datos especificada
+           self.conexion.database = nombre_BBDD
+
+           sql = "INSERT INTO actores (id_actor, nombre_actor, anno_nacimiento, conocido, que_hace, premios) VALUES (%s, %s, %s, %s,%s,%s)" 
+
+                     
+           #insertamos la lista de actores
+           try:
+                mycursor.executemany(sql, lista_actores)
+                self.conexion.commit()
+                print(mycursor.rowcount,"registros insertados")
+           except mysql.connector.Error as err:
+                print("Ha habido un error en la inserción")
+                print(err) '''
+    
+        #Metemos los datos de la fase 4
+        
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase-4.csv"
+        
+        data_oscars =pd.read_csv(url)
+        
+        #data_oscars.fillna('N/A', inplace=True)
+        #data_oscars['mes_estreno'].fillna('N/A', inplace=True)
+        
+        data_oscars.info()
+             
+        #print(data_oscars)
+                
+        lista_oscars=[tuple(i) for i in data_oscars.values]
+        #print(lista_oscars)
+        
+        #df_fase3=pd.DataFrame(lista_oscars)
+        
+        if self.conexion.is_connected():
+            
+           mycursor = self.conexion.cursor()
+           
+           # Cambiar a la base de datos especificada
+           self.conexion.database = nombre_BBDD
+            
+           sql = "INSERT INTO oscars (id_ceremonia, fecha_ceremonia, mejor_pelicula, mejor_director, mejor_actor, mejor_actriz) VALUES (%s, %s, %s, %s,%s,%s)" 
+
+                     
+           #insertamos la lista de oscars
+           try:
+                mycursor.executemany(sql, lista_oscars)
+                self.conexion.commit()
+                print(mycursor.rowcount,"registros insertados")
+           except mysql.connector.Error as err:
+                print("Ha habido un error en la inserción")
+                print(err) 
