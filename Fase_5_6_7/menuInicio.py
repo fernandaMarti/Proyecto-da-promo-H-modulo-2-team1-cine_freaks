@@ -136,17 +136,25 @@ def llamarOpcionCorrecta(opcion):
     
     elif opcion == 8:
        
-        # Llamar a la función hacer_consulta con el entero
-        seleccion= api.hacer_consulta()
-        consulta=api.mi_sql(seleccion)
-        respuesta =api.respuesta(consulta)
-        print(" ")
+        continuar =True
+        while continuar:
+            
+            # Llamar a la función hacer_consulta con el entero
+            seleccion= api.hacer_consulta()
+            consulta=api.mi_sql(seleccion)
+            respuesta,columnas =api.respuesta(consulta)
+            print(" ")
         
-        print("La solución a tu consulta que has realizado es: ")
-        print(respuesta)
+            print("La solución a tu consulta que has realizado es: ")
+            print(columnas)
+            print(respuesta)
         
-        input("Pulse Enter para continuar  ")
-        os.system("clear")
+            respuesta= input("¿Quieres realizar otra consulta s/n?  ")
+        
+            if respuesta != 's':
+                continuar =False
+                os.system("clear")
+                menuPrincipal()   
       
     elif opcion == 9:
         os.system("clear")

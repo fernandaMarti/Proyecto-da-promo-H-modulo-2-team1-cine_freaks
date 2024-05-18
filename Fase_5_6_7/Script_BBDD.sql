@@ -82,6 +82,6 @@ VALUES ('¿Qué género es el mejor valorado en IMDB?',"SELECT genero_pelicula A
 ('¿En que año se estrenaron mas cortos?',"SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'short' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"),
 ('¿Cuál es el corto mejor valorado en IMDB?',"SELECT nombre_pelicula AS corto, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'short') GROUP BY corto ORDER BY puntuacion DESC LIMIT 1"),
 ('¿Cuál es la película mejor valorada en IMDB?',"SELECT nombre_pelicula AS pelicula, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'movie' GROUP BY corto ORDER BY puntuacion DESC LIMIT 1"),
-('¿¿Quién es el actor más joven?',"SELECT nombre_actor, anno_nacimiento AS año FROM actores ORDER BY año DESC LIMIT 1"),
+('¿Quién es el actor más joven?',"SELECT nombre_actor, anno_nacimiento AS año FROM actores ORDER BY año DESC LIMIT 1"),
 ('¿Que actriz/actor ha ganado más premios?',"SELECT nombre_actor AS 'actriz/actor', SUM(premios) AS 'num premios' FROM actores GROUP BY nombre_actor ORDER BY SUM(premios) DESC LIMIT 1"),
 ('¿Número de peliculas estrenadas por año?',"SELECT anno_estreno as año, COUNT(id_pelicula) AS 'total pelis' FROM MoviesDataset GROUP BY anno_estreno");
