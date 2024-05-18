@@ -32,8 +32,7 @@ class DAO:
                 cursor.execute("SELECT * FROM moviesdataset ORDER BY id_pelicula ASC")
                 resultados=cursor.fetchall()
                 cursor.close
-                #columnas=['Tipo pelicula,'Titulo pelicula',]
-                #df = pd.DataFrame(resultados, columns=columnas)
+                
                 return resultados
                 
             except Error as ex:
@@ -43,6 +42,8 @@ class DAO:
         self.conexion.close()
                 
     def altaPelicula(self, pelicula):
+        
+        self.conexion.database = 'cinemextract'
         
         if self.conexion.is_connected():
             try:
@@ -57,6 +58,8 @@ class DAO:
         self.conexion.close()
 
     def actualizarPelicula (self,pelicula):
+        
+        self.conexion.database = 'cinemextract'
         if self.conexion.is_connected():
             try:
                 
@@ -73,6 +76,8 @@ class DAO:
         self.conexion.close()
     
     def eliminarPelicula(self,codigocodigoPeliEliminar):
+        
+         self.conexion.database = 'cinemextract'
          
          if self.conexion.is_connected():
              
@@ -127,7 +132,7 @@ class DAO:
                 # Comprobar si la base de datos existe
                 cursor.execute("SHOW TABLES")
                 tablas = cursor.fetchall()
-                print(tablas)
+               
                 
                 if ('moviesdataset',) in tablas:
                     print("La tabla moviesdataset ya existe en la base de datos.")
@@ -142,7 +147,7 @@ class DAO:
                     print("La tabla actores ya existe en la base de datos.")
                 else:
                     # Crear la tabla si no existe
-                    sql = "CREATE TABLE actores (id_actor INT AUTO_INCREMENT, nombre_actor VARCHAR (100), anno_nacimiento INT, conocido VARCHAR (45), que_hace VARCHAR (45), premios INT, PRIMARY KEY (id_actor))"
+                    sql = "CREATE TABLE actores (id_actor INT AUTO_INCREMENT, nombre_actor VARCHAR (100), anno_nacimiento INT, conocido VARCHAR (1000), que_hace VARCHAR (1000), premios INT, PRIMARY KEY (id_actor))"
                     cursor.execute(sql)
                     self.conexion.commit()
                     print("Tabla actores creada correctamente")
@@ -178,7 +183,7 @@ class DAO:
             except Error as ex:
                 print("Error al crear la tabla: {0}".format(ex))
 
-    
+       
 class API:    
     def __init__(self):
         try:
@@ -389,9 +394,7 @@ class API:
         
         cnx = mysql.connector.connect(user='root', password='AlumnaAdalab',
                               host='127.0.0.1', database='cinemextract')
-        
-      
-         
+              
         mycursor = cnx.cursor()
         
         mostrar_consultas= "SELECT Num_consulta,descripcion FROM consultas"
@@ -406,6 +409,7 @@ class API:
         print("CONSULTAS SQL")
         print("")
         myresult = "\n".join(map(str, myresult))
+        print(myresult)
         
         print("")
                
@@ -434,7 +438,7 @@ class API:
         cnx = mysql.connector.connect(user='root', password='AlumnaAdalab',
                               host='127.0.0.1', database='cinemextract',port='3306')
         
-        print(cnx)
+       
         try:
             
             consulta_formateada = consulta[0][0]

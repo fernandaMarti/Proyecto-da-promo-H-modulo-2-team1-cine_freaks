@@ -9,6 +9,7 @@ import os
 
 def menuPrincipal():
     
+    os.system("clear")
     continuar =True
     while continuar:
         opcionCorrecta =False
@@ -59,6 +60,8 @@ def llamarOpcionCorrecta(opcion):
             print ("Ocurrio un error en opcion 1")    
         
     elif opcion == 2:
+        
+        os.system("clear")
         pelicula =opciones.pedirDatosPelicula()
         
         try:
@@ -67,6 +70,7 @@ def llamarOpcionCorrecta(opcion):
             print ("Ocurrio un error al dar de alta la pelicula {0}".format(err))
         
     elif opcion == 3:
+        os.system("clear")
         try:
             peliculas=dao.listaPeliculas()
             if len(peliculas) >0:
@@ -85,6 +89,7 @@ def llamarOpcionCorrecta(opcion):
           
   
     elif opcion == 4:
+        os.system("clear")
         try:
             peliculas=dao.listaPeliculas()
        
@@ -104,22 +109,30 @@ def llamarOpcionCorrecta(opcion):
             print ("Ocurrio un error al intentar eliminar la pelicula {0}".format(err))
         
     elif opcion == 5:
+        
+        os.system("clear")
         nombre= input("Introduce el nombre de la base de datos a crear:  ")
         dao.crear_BBDD(nombre)
+        input("Pulse Enter para continuar  ")
+        os.system("clear")
   
-    
     elif opcion == 6:
         
+        os.system("clear")
         nombre= input("Introduce el nombre de la base de datos donde quieres crear las tablas:  ")
      
         dao.crear_Tablas(nombre)
-    
+        input("Pulse Enter para continuar  ")
+        os.system("clear")
     
     elif opcion == 7:
-    
+        
+      os.system("clear")
       nombre= input("Introduce el nombre de la base de datos donde quieres cargar los datos:  ")  
         
-      api.cargar_datos_BBDD(nombre) 
+      api.cargar_datos_BBDD(nombre)
+      input("Pulse Enter para continuar  ")
+      os.system("clear")
     
     elif opcion == 8:
        
@@ -127,11 +140,18 @@ def llamarOpcionCorrecta(opcion):
         seleccion= api.hacer_consulta()
         consulta=api.mi_sql(seleccion)
         respuesta =api.respuesta(consulta)
+        print(" ")
+        
         print("La solución a tu consulta que has realizado es: ")
         print(respuesta)
+        
+        input("Pulse Enter para continuar  ")
+        os.system("clear")
       
     elif opcion == 9:
+        os.system("clear")
         quit
+        
     else:
         pass
 

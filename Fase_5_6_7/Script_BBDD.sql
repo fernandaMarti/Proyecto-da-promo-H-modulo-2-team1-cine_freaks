@@ -34,8 +34,8 @@ CREATE TABLE actores (
 id_actor INT AUTO_INCREMENT,
 nombre_actor VARCHAR (100),
 anno_nacimiento INT,
-conocido VARCHAR (255),
-que_hace VARCHAR (255),
+conocido VARCHAR (1000),
+que_hace VARCHAR (1000),
 premios INT,
 PRIMARY KEY (id_actor)
 );
