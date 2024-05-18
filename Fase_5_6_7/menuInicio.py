@@ -124,8 +124,10 @@ def llamarOpcionCorrecta(opcion):
     elif opcion == 8:
        
         # Llamar a la función hacer_consulta con el entero
-        api.hacer_consulta()
-              
+        seleccion= api.hacer_consulta()
+        consulta=api.mi_sql(seleccion)
+        print("La solución a tu consulta que has realizado es: ")
+        print(consulta)
       
     elif opcion == 9:
         quit
