@@ -32,6 +32,8 @@ class DAO:
                 cursor.execute("SELECT * FROM moviesdataset ORDER BY id_pelicula ASC")
                 resultados=cursor.fetchall()
                 cursor.close
+                #columnas=['Tipo pelicula,'Titulo pelicula',]
+                #df = pd.DataFrame(resultados, columns=columnas)
                 return resultados
                 
             except Error as ex:
@@ -353,7 +355,7 @@ class API:
         def insertar_datos_tabla_int_pelis_actores():
             try:
                 # Conexión a la base de datos
-                conexion = mysql.connector.connect(user='root', password='tu_contraseña', host='localhost', port='3306', database='tu_base_de_datos')
+                conexion = mysql.connector.connect(user='root', password='tu_contraseña', host='localhost', port='3306', database='cinemextract')
                 cursor = conexion.cursor()
                 
                 url_actores="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/lista_actores_prueba.csv"
@@ -385,119 +387,73 @@ class API:
     
     def hacer_consulta(self):
         
+        cnx = mysql.connector.connect(user='root', password='AlumnaAdalab',
+                              host='127.0.0.1', database='cinemextract')
+        
+      
+         
+        mycursor = cnx.cursor()
+        
+        mostrar_consultas= "SELECT Num_consulta,descripcion FROM consultas"
+        
+        mycursor.execute(mostrar_consultas)
+        
+        myresult = mycursor.fetchall()
+        
+                
         os.system("clear")
         print("")      
         print("CONSULTAS SQL")
         print("")
-        print('1. ¿Qué género es el mejor valorado en IMDB?')
-        print('3. ¿Qué género es el mejor valorado en Tomatometro?')
-        print('4. ¿En que año se estrenaron más películas?')
-        print('5. ¿En que año se estrenaron mas cortos?')
-        print('6. ¿Cuál es el corto mejor valorado en IMDB?')
-        print('7. ¿Cuál es la película mejor valorada en IMDB?')
-        print('8. ¿Qué palabra es la más utilizada en los títulos?')
-        print('9. ¿Qué director ha dirigido más peliculas?')
-        print('10. ¿Qué actor ha actuado en más peliculas?')
-        print('11. ¿Quién es el actor más joven?')
-        print('12. ¿Número de peliculas estrenadas por año?')
-        print('13 ¿Que mujer ha ganado mas premios Óscar a major actriz?')
-        print('13. Volver al menú')
+        myresult = "\n".join(map(str, myresult))
+        
         print("")
                
-        
-        elegida= int(input("Elige una consulta a realizar: "))
-        
-        if elegida ==1:
-            
-          '1. ¿Qué género es el mejor valorado en IMDB?'
-            
-          return "SELECT genero_pelicula AS genero, ROUND(SUM(puntuacion_imdb)) AS puntuacion FROM MoviesDataset INNER JOIN detalles_peliculas ON MoviesDataset.id_pelicula = detalles_peliculas.id_pelicula GROUP BY genero_pelicula ORDER BY puntuacion DESC LIMIT 1"
-                   
-        elif elegida==2:
-            
-          '2. ¿Qué género es el mejor valorado en Tomatometro?'
-            
-          return "SELECT genero_pelicula AS genero, SUM(puntuacion_rotten) AS puntuacion FROM MoviesDataset INNER JOIN detalles_peliculas ON MoviesDataset.id_pelicula = detalles_peliculas.id_pelicula GROUP BY genero_pelicula ORDER BY puntuacion DESC LIMIT 1"
-         
-            
-        elif elegida==3:
-            
-          '3. ¿Qué género es el mejor valorado en Tomatometro?'
-            
-          return "SELECT genero_pelicula AS genero, SUM(puntuacion_rotten) AS puntuacion FROM MoviesDataset INNER JOIN detalles_peliculas ON MoviesDataset.id_pelicula = detalles_peliculas.id_pelicula GROUP BY genero_pelicula ORDER BY puntuacion DESC LIMIT 1"
+        return int(input("Introduzca la consulta que quiere realizar introduciendo el numero de consulta: "))
         
             
-        elif elegida==4:
-            
-          '4. ¿En que año se estrenaron más películas?'
-            
-          return " SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'movie' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"
-          
-          
-        elif elegida==5:
-            
-          '5. ¿En que año se estrenaron mas cortos?'''
-            
-          return "SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'short' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"
-         
-            
-        elif elegida==6:
-            
-          '6. ¿Cuál es el corto mejor valorado en IMDB?'
-            
-          return "SELECT nombre_pelicula AS corto, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'short') GROUP BY corto ORDER BY puntuacion DESC LIMIT 1"
-         
-            
-        elif elegida==7:
-            
-          '7. ¿Cuál es la película mejor valorada en IMDB?'  
-          
-          return "SELECT nombre_pelicula AS pelicula, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'movie' GROUP BY corto ORDER BY puntuacion DESC LIMIT 1"
-          
-             
-        elif elegida==8:
-            
-          '8. ¿Quién es el actor más joven?'
-            
-          return "SELECT nombre_actor, anno_nacimiento AS año FROM actores ORDER BY año DESC LIMIT 1"
-          
-        
-        elif elegida==9:
-            
-          '9. ¿Quién es el actor más joven?'
-            
-          return "SELECT nombre_actor, anno_nacimiento AS año FROM actores ORDER BY año DESC LIMIT 1"
-          
-        
-        elif elegida==10:
-            
-          '10. ¿Número de peliculas estrenadas por año?'
-            
-          return "SELECT anno_estreno as año, COUNT(id_pelicula) AS 'total pelis' FROM MoviesDataset GROUP BY anno_estreno"
-         
-            
-        elif elegida==11:
-            
-          '11. ¿Que actriz/actor ha ganado más premios?'
-            
-          return "SELECT nombre_actor AS 'actriz/actor', SUM(premios) AS 'num premios' FROM actores GROUP BY nombre_actor ORDER BY SUM(premios) DESC LIMIT 1"
-                      
-        else:
-          pass
-        
-        
-    def mi_sql(self,sql):
+    def mi_sql(self,seleccion):
         
         cnx = mysql.connector.connect(user='root', password='AlumnaAdalab',
                               host='127.0.0.1', database='cinemextract')
-         
+              
         mycursor = cnx.cursor()
+        
+        consulta_seleccionada= "SELECT consulta FROM consultas WHERE Num_consulta = %s"
                   
-        mycursor.execute(sql)
+        mycursor.execute(consulta_seleccionada,(seleccion,))
         
         myresult = mycursor.fetchall()
         
-        mycursor.close()
-        cnx.close()
-       
-        return myresult 
+                     
+        return myresult
+    
+    
+    def respuesta(self,consulta):
+        
+        cnx = mysql.connector.connect(user='root', password='AlumnaAdalab',
+                              host='127.0.0.1', database='cinemextract',port='3306')
+        
+        print(cnx)
+        try:
+            
+            consulta_formateada = consulta[0][0]
+                 
+            mycursor = cnx.cursor()
+                
+            mycursor.execute(consulta_formateada)
+        
+            respuesta = mycursor.fetchall()
+        
+        except Error as e:
+            print(f"Error al ejecutar la consulta: {e}")
+            respuesta = None
+
+        finally:
+        # Asegurarse de cerrar el cursor y la conexión a la base de datos
+            if mycursor:
+                mycursor.close()
+            if cnx:
+                cnx.close()
+                     
+        return respuesta
