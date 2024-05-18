@@ -77,11 +77,18 @@ PRIMARY KEY (Num_consulta)
 
 INSERT INTO consultas (descripcion,consulta) 
 VALUES ('¿Qué género es el mejor valorado en IMDB?',"SELECT genero_pelicula AS genero, ROUND(SUM(puntuacion_imdb)) AS puntuacion FROM MoviesDataset INNER JOIN detalles_peliculas ON MoviesDataset.id_pelicula = detalles_peliculas.id_pelicula GROUP BY genero_pelicula ORDER BY puntuacion DESC LIMIT 1"),
-('¿Qué género es el mejor valorado en Tomatometro?',"SELECT genero_pelicula AS genero, SUM(puntuacion_rotten) AS puntuacion FROM MoviesDataset INNER JOIN detalles_peliculas ON MoviesDataset.id_pelicula = detalles_peliculas.id_pelicula GROUP BY genero_pelicula ORDER BY puntuacion DESC LIMIT 1"),
-('¿En que año se estrenaron más películas?',"SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'movie' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"),
-('¿En que año se estrenaron mas cortos?',"SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'short' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"),
+('¿Qué género es el mejor valorado en Tomatómetro?',"SELECT genero_pelicula AS genero, SUM(puntuacion_rotten) AS puntuacion FROM MoviesDataset INNER JOIN detalles_peliculas ON MoviesDataset.id_pelicula = detalles_peliculas.id_pelicula GROUP BY genero_pelicula ORDER BY puntuacion DESC LIMIT 1"),
+('¿En qué año se estrenaron más películas?',"SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'movie' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"),
+('¿En qué año se estrenaron más cortos?',"SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'short' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"),
+('¿En qué año hubo más estrenos (pelis y cortos)?',"SELECT anno_estreno as año, COUNT(id_pelicula) AS total_pelis FROM MoviesDataset GROUP BY anno_estreno ORDER BY total_pelis DESC LIMIT 1")
 ('¿Cuál es el corto mejor valorado en IMDB?',"SELECT nombre_pelicula AS corto, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'short') GROUP BY corto ORDER BY puntuacion DESC LIMIT 1"),
+<<<<<<< HEAD
 ('¿Cuál es la película mejor valorada en IMDB?',"SELECT nombre_pelicula AS pelicula, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'movie' GROUP BY corto ORDER BY puntuacion DESC LIMIT 1"),
 ('¿Quién es el actor más joven?',"SELECT nombre_actor, anno_nacimiento AS año FROM actores ORDER BY año DESC LIMIT 1"),
 ('¿Que actriz/actor ha ganado más premios?',"SELECT nombre_actor AS 'actriz/actor', SUM(premios) AS 'num premios' FROM actores GROUP BY nombre_actor ORDER BY SUM(premios) DESC LIMIT 1"),
+=======
+('¿Cuál es la película mejor valorada en IMDB?',"SELECT nombre_pelicula AS pelicula, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'movie') GROUP BY pelicula ORDER BY puntuacion DESC LIMIT 1"),
+('¿Quién es el actor más joven?',"SELECT nombre_actor, anno_nacimiento AS año FROM actores ORDER BY año DESC LIMIT 1"),
+('¿Qué actriz/actor ha ganado más premios?',"SELECT nombre_actor AS 'actriz/actor', SUM(premios) AS 'num premios' FROM actores GROUP BY nombre_actor ORDER BY SUM(premios) DESC LIMIT 1"),
+>>>>>>> 6ca23073f59d4fcb8bcf898d7cc1becb2801f6fc
 ('¿Número de peliculas estrenadas por año?',"SELECT anno_estreno as año, COUNT(id_pelicula) AS 'total pelis' FROM MoviesDataset GROUP BY anno_estreno");
