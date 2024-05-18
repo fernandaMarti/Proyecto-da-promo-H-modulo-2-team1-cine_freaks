@@ -4,16 +4,12 @@ import os
 def listarPeliculas(peliculas):  
     
     print("Peliculas: ")
-    
-    
-    for peli in peliculas:
-        
-        columnas = ['Tipo pelicula', 'Titulo pelicula','año de estreno','mes de estreno','id pelicula','genero pelicula']
-        df = pd.DataFrame(peliculas, columns=columnas)
-        print(df)
+            
+    columnas = ['Tipo pelicula', 'Titulo pelicula','año de estreno','mes de estreno','id pelicula','genero pelicula']
+    df = pd.DataFrame(peliculas, columns=columnas)
+    print(df)
       
-        #datos = "tipo_pelicula: {0} titulo pelicula: {1} anno_estreno: {2} mes_estreno: {3} id_pelicula: {4} genero_pelicula: {5}"
-        #print (datos.format(peli[0],peli[1],peli[2],peli[3],peli[4],peli[5]))
+       
 
     print(" ")   
             
@@ -32,6 +28,8 @@ def pedirDatosPelicula ():
     
     pelicula = (tipo_pelicula, titulo_pelicula,anno_estreno,mes_estreno,id_pelicula,genero_pelicula)
     
+    os.system("clear")
+    
     return pelicula
 
 
@@ -49,6 +47,8 @@ def pedirDatosPeliModificar(peliculas):
             mes_estreno = input("Mes de estreno (MM): ")
             genero_pelicula = input("Género al que pertenece la película (Drama,Comedy,Action): ")
             pelicula = (tipo_pelicula, titulo_pelicula, anno_estreno, mes_estreno, codigoPeliEditar, genero_pelicula)
+            
+            os.system("clear")
             
             return pelicula
 
@@ -73,5 +73,6 @@ def pedirDatosPeliEliminar(peliculas):
     if not existePeli:
         codigoPeliEliminar =""
     
+    os.system("clear")
     return codigoPeliEliminar        
     
