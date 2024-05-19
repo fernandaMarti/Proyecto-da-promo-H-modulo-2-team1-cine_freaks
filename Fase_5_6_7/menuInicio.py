@@ -3,8 +3,26 @@ from conexion import API
 import opciones as opciones
 from mysql.connector.errors import Error
 import os
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 #Vamos a hacer un Crud con Python
+def logo_inicio():
+    
+    print("   ####    ####    ##   ##  #######  ##   ##  #######  ##  ##   ######   ######     ##       ####   ###### ")
+    print("  ####      ##     ### ###   ##   #  ### ###   ##   #  ##  ##   # ## #    ##  ##   ####     ##  ##  # ## # ")
+    print(" ##         ##     #######   ## #    #######   ## #     ####      ##      ##  ##  ##  ##   ##         ## ")
+    print(" ##         ##     #######   ####    #######   ####      ##       ##      #####   ##  ##   ##         ##")
+    print(" ##         ##     ## # ##   ## #    ## # ##   ## #     ####      ##      ## ##   ######   ##         ##")
+    print("  ##  ##    ##     ##   ##   ##   #  ##   ##   ##   #  ##  ##     ##      ##  ##  ##  ##    ##  ##    ##")
+    print("   ####    ####    ##   ##  #######  ##   ##  #######  ##  ##    ####    #### ##  ##  ##     ####    ####")
+    
+    
+    image_path = 'ruta/a/tu/imagen.jpg'
+    img = mpimg.imread(image_path)
+    plt.imshow(img)
+    plt.axis('off')  # Ocultar ejes
+    plt.show()
 
 
 def menuPrincipal():
@@ -15,6 +33,8 @@ def menuPrincipal():
         opcionCorrecta =False
         
         while not opcionCorrecta:
+            logo_inicio()
+            print("")
             
             print("===========================    Menú    ==============================")
             
@@ -153,13 +173,8 @@ def llamarOpcionCorrecta(opcion):
         
             if respuesta != 's':
                 continuar =False
-                os.system("clear")
-                menuPrincipal()   
-      
-    elif opcion == 9:
-        os.system("clear")
-        quit
-        
+                os.system("clear") 
+            
     else:
         pass
 
