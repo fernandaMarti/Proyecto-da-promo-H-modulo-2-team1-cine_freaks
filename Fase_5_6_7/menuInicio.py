@@ -9,6 +9,7 @@ import os
 
 def menuPrincipal():
     
+    os.system("clear")
     continuar =True
     while continuar:
         opcionCorrecta =False
@@ -43,7 +44,7 @@ def menuPrincipal():
 def llamarOpcionCorrecta(opcion):
     dao = DAO ()
     api = API()
-    if opcion ==1:
+    if opcion == 1:
         
         try:
             peliculas=dao.listaPeliculas()
@@ -58,7 +59,9 @@ def llamarOpcionCorrecta(opcion):
         except:
             print ("Ocurrio un error en opcion 1")    
         
-    elif opcion ==2:
+    elif opcion == 2:
+        
+        os.system("clear")
         pelicula =opciones.pedirDatosPelicula()
         
         try:
@@ -66,7 +69,8 @@ def llamarOpcionCorrecta(opcion):
         except Error as err:
             print ("Ocurrio un error al dar de alta la pelicula {0}".format(err))
         
-    elif opcion ==3:
+    elif opcion == 3:
+        os.system("clear")
         try:
             peliculas=dao.listaPeliculas()
             if len(peliculas) >0:
@@ -84,7 +88,8 @@ def llamarOpcionCorrecta(opcion):
             print ("Ocurrio un error al intentar eliminar la pelicula {0}".format(err))
           
   
-    elif opcion ==4:
+    elif opcion == 4:
+        os.system("clear")
         try:
             peliculas=dao.listaPeliculas()
        
@@ -103,72 +108,50 @@ def llamarOpcionCorrecta(opcion):
             
             print ("Ocurrio un error al intentar eliminar la pelicula {0}".format(err))
         
-    elif opcion ==5:
+    elif opcion == 5:
+        
+        os.system("clear")
         nombre= input("Introduce el nombre de la base de datos a crear:  ")
         dao.crear_BBDD(nombre)
+        input("Pulse Enter para continuar  ")
+        os.system("clear")
   
-    
-    elif opcion ==6:
+    elif opcion == 6:
         
+        os.system("clear")
         nombre= input("Introduce el nombre de la base de datos donde quieres crear las tablas:  ")
      
         dao.crear_Tablas(nombre)
-    
+        input("Pulse Enter para continuar  ")
+        os.system("clear")
     
     elif opcion == 7:
-    
+        
+      os.system("clear")
       nombre= input("Introduce el nombre de la base de datos donde quieres cargar los datos:  ")  
         
       api.cargar_datos_BBDD(nombre)
-      
-      
+      input("Pulse Enter para continuar  ")
+      os.system("clear")
     
-    
-    elif opcion==8:
+    elif opcion == 8:
        
-        print("CONSULTAS SQL")
-        print("")
-        print('1. ¿Que mujer ha ganado mas premios Óscar a major actriz?')
-        print('2. ¿Qué género es el mejor valorado en IMDB?')
-        print('3. ¿Qué género es el mejor valorado en Tomatometro?')
-        print('4. ¿En que año se estrenaron más películas?')
-        print('5. ¿En que año se estrenaron mas cortos?')
-        print('6. ¿Cuál es el corto mejor valorado en IMDB?')
-        print('7. ¿Cuál es la película mejor valorada en IMDB?')
-        print('8. ¿Qué palabra es la más utilizada en los títulos?')
-        print('9. ¿Qué director ha dirigido más peliculas?')
-        print('10. ¿Qué actor ha actuado en más peliculas?')
-        print('11. ¿Quién es el actor más joven?')
-        print('12. ¿Número de peliculas estrenadas por año?')
-        print('13. Volver al menú')
-        print("")
-       
+        # Llamar a la función hacer_consulta con el entero
+        seleccion= api.hacer_consulta()
+        consulta=api.mi_sql(seleccion)
+        respuesta, columnas =api.respuesta(consulta)
+        print(" ")
         
-        consulta= input("Elige una consulta a realizar:")
-            
-        if consulta ==1:
-            pass
-            
-        elif consulta==2:
-            pass
-        elif consulta==3:
-            pass
-        elif consulta==4:
-            pass
-        elif consulta==5:
-            pass
-        elif consulta==6:
-            pass
-        elif consulta==7:
-            pass
-        elif consulta==8:
-            pass
-            
-        else:
-            menuPrincipal()
-       
-    elif opcion ==9:
+        print("La solución a tu consulta que has realizado es: ")
+        print(columnas,'/n',respuesta)
+        
+        input("Pulse Enter para continuar  ")
+        os.system("clear")
+      
+    elif opcion == 9:
+        os.system("clear")
         quit
+        
     else:
         pass
 
