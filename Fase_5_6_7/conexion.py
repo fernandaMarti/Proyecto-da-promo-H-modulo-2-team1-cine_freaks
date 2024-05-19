@@ -328,8 +328,7 @@ class API:
                 print(err) 
     
         #Metemos los datos de la fase 4
-       
-
+        
         url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase4.csv"
         
         data_oscars =pd.read_csv(url)
