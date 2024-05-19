@@ -178,6 +178,15 @@ class DAO:
                     cursor.execute(sql)
                     self.conexion.commit()
                     print("Tabla int_pelis_actores creada correctamente")
+                    
+                if ('consultas',) in tablas:
+                    print("La tabla consultas ya existe en la base de datos.")
+                else:
+                    # Crear la tabla si no existe
+                    sql = "CREATE TABLE consultas (Num_consulta INT AUTO_INCREMENT,descripcion VARCHAR (500),consulta VARCHAR (500),PRIMARY KEY (Num_consulta))"
+                    cursor.execute(sql)
+                    self.conexion.commit()
+                    print("Tabla consultas creada correctamente")
                 
                 
             except Error as ex:
@@ -319,8 +328,9 @@ class API:
                 print(err) 
     
         #Metemos los datos de la fase 4
-        
-        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase-4.csv"
+       
+
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase4.csv"
         
         data_oscars =pd.read_csv(url)
         
@@ -353,7 +363,38 @@ class API:
                 print(mycursor.rowcount,"registros insertados")
            except mysql.connector.Error as err:
                 print("Ha habido un error en la inserción")
-                print(err) 
+                print(err)
+                
+        #Rellenamos la tabla consultas:
+        
+        if self.conexion.is_connected():
+            
+           mycursor = self.conexion.cursor()
+           
+           # Cambiar a la base de datos especificada
+           self.conexion.database = nombre_BBDD
+            
+           sql = "INSERT INTO consultas (descripcion,consulta) VALUES (%s, %s)" 
+
+           lista_consultas = [("¿Qué género es el mejor valorado en IMDB?", "SELECT genero_pelicula AS genero, ROUND(SUM(puntuacion_imdb)) AS puntuacion FROM MoviesDataset INNER JOIN detalles_peliculas ON MoviesDataset.id_pelicula = detalles_peliculas.id_pelicula GROUP BY genero_pelicula ORDER BY puntuacion DESC LIMIT 1"),
+           ( "¿Qué género es el mejor valorado en Tomatometro?", "SELECT genero_pelicula AS genero, SUM(puntuacion_rotten) AS puntuacion FROM MoviesDataset INNER JOIN detalles_peliculas ON MoviesDataset.id_pelicula = detalles_peliculas.id_pelicula GROUP BY genero_pelicula ORDER BY puntuacion DESC LIMIT 1"),
+           ("¿En qué año se estrenaron más películas?", "SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'movie' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"),
+           ("¿En qué año se estrenaron más cortos?", "SELECT anno_estreno AS 'año estreno', COUNT(id_pelicula) AS 'total estrenos' FROM MoviesDataset WHERE tipo_pelicula = 'short' GROUP BY anno_estreno ORDER BY COUNT(id_pelicula) DESC LIMIT 1"),
+           ("¿Cuál es el corto mejor valorado en IMDB?", "SELECT nombre_pelicula AS corto, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'short') GROUP BY corto ORDER BY puntuacion DESC LIMIT 1"),
+           ("¿Cuál es la película mejor valorada en IMDB?", "SELECT nombre_pelicula AS pelicula, SUM(puntuacion_imdb) AS puntuacion FROM detalles_peliculas WHERE id_pelicula IN (SELECT id_pelicula FROM MoviesDataset WHERE tipo_pelicula = 'movie') GROUP BY pelicula ORDER BY puntuacion DESC LIMIT 1"),
+           ("¿Quién es el actor más joven?", "SELECT nombre_actor, anno_nacimiento AS año FROM actores ORDER BY año DESC LIMIT 1"),
+           ("¿Qué actriz/actor ha ganado más premios?", "SELECT nombre_actor AS 'actriz/actor', SUM(premios) AS 'num premios' FROM actores GROUP BY nombre_actor ORDER BY SUM(premios) DESC LIMIT 1"),
+           ("¿Número de películas estrenadas por año?", "SELECT anno_estreno as año, COUNT(id_pelicula) AS 'total pelis' FROM MoviesDataset GROUP BY anno_estreno")] 
+                 
+           #insertamos la lista de consultas
+           try:
+                mycursor.executemany(sql, lista_consultas)
+                self.conexion.commit()
+                print(mycursor.rowcount,"registros insertados")
+           except mysql.connector.Error as err:
+                print("Ha habido un error en la inserción")
+                print(err)
+        
                 
         #Rellenamos la tabla intermedia:
         
@@ -428,8 +469,7 @@ class API:
         mycursor.execute(consulta_seleccionada,(seleccion,))
         
         myresult = mycursor.fetchall()
-        
-                     
+                             
         return myresult
     
     
@@ -453,7 +493,7 @@ class API:
         except Error as e:
             print(f"Error al ejecutar la consulta: {e}")
             respuesta = None
-            nombre_columnas = None
+            nombre_columnas =None
 
         finally:
         # Asegurarse de cerrar el cursor y la conexión a la base de datos
@@ -462,4 +502,4 @@ class API:
             if cnx:
                 cnx.close()
                      
-        return respuesta, nombre_columnas
+        return respuesta,nombre_columnas
