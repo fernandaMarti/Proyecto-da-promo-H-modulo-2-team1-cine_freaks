@@ -3,8 +3,12 @@ from conexion import API
 import opciones as opciones
 from mysql.connector.errors import Error
 import os
+import requests
+from PIL import Image
+from io import BytesIO
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+import urllib.request
+
 
 #Vamos a hacer un Crud con Python
 def logo_inicio():
@@ -17,13 +21,6 @@ def logo_inicio():
     print("  ##  ##    ##     ##   ##   ##   #  ##   ##   ##   #  ##  ##     ##      ##  ##  ##  ##    ##  ##    ##")
     print("   ####    ####    ##   ##  #######  ##   ##  #######  ##  ##    ####    #### ##  ##  ##     ####    ####")
     
-    
-    image_path = 'ruta/a/tu/imagen.jpg'
-    img = mpimg.imread(image_path)
-    plt.imshow(img)
-    plt.axis('off')  # Ocultar ejes
-    plt.show()
-
 
 def menuPrincipal():
     
@@ -35,8 +32,9 @@ def menuPrincipal():
         while not opcionCorrecta:
             logo_inicio()
             print("")
-            
-            print("===========================    Menú    ==============================")
+            print
+            print("===========================================    Menú    ====================================================")
+            print("")
             
             print("1. Ver peliculas")
             print("2. Alta Pelicula")
@@ -70,6 +68,8 @@ def llamarOpcionCorrecta(opcion):
             peliculas=dao.listaPeliculas()
           
             if len(peliculas) >0:
+                os.system("clear")
+                logo_inicio()
                 opciones.listarPeliculas(peliculas)
                 input("Pulse Enter para continuar  ")
                 os.system("clear")
@@ -82,6 +82,8 @@ def llamarOpcionCorrecta(opcion):
     elif opcion == 2:
         
         os.system("clear")
+        logo_inicio()
+        print("")
         pelicula =opciones.pedirDatosPelicula()
         
         try:
@@ -91,6 +93,8 @@ def llamarOpcionCorrecta(opcion):
         
     elif opcion == 3:
         os.system("clear")
+        logo_inicio()
+        print("")
         try:
             peliculas=dao.listaPeliculas()
             if len(peliculas) >0:
@@ -110,6 +114,8 @@ def llamarOpcionCorrecta(opcion):
   
     elif opcion == 4:
         os.system("clear")
+        logo_inicio()
+        print("")
         try:
             peliculas=dao.listaPeliculas()
        
@@ -131,6 +137,8 @@ def llamarOpcionCorrecta(opcion):
     elif opcion == 5:
         
         os.system("clear")
+        logo_inicio()
+        print("")
         nombre= input("Introduce el nombre de la base de datos a crear:  ")
         dao.crear_BBDD(nombre)
         input("Pulse Enter para continuar  ")
@@ -139,6 +147,8 @@ def llamarOpcionCorrecta(opcion):
     elif opcion == 6:
         
         os.system("clear")
+        logo_inicio()
+        print("")
         nombre= input("Introduce el nombre de la base de datos donde quieres crear las tablas:  ")
      
         dao.crear_Tablas(nombre)
@@ -148,6 +158,8 @@ def llamarOpcionCorrecta(opcion):
     elif opcion == 7:
         
       os.system("clear")
+      logo_inicio()
+      print("")
       nombre= input("Introduce el nombre de la base de datos donde quieres cargar los datos:  ")  
         
       api.cargar_datos_BBDD(nombre)
@@ -155,7 +167,9 @@ def llamarOpcionCorrecta(opcion):
       os.system("clear")
     
     elif opcion == 8:
-       
+        os.system("clear")
+        logo_inicio()
+        print("")
         continuar =True
         while continuar:
             
@@ -173,7 +187,11 @@ def llamarOpcionCorrecta(opcion):
         
             if respuesta != 's':
                 continuar =False
-                os.system("clear") 
+                os.system("clear")
+            else:
+                 os.system("clear")
+                 logo_inicio()
+                 print("")
             
     else:
         pass

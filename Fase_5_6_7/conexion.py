@@ -11,6 +11,7 @@ from time import sleep
 import os
 
 
+
 class DAO:
     def __init__(self):
         try:
@@ -443,8 +444,6 @@ class API:
         
         myresult = mycursor.fetchall()
         
-                
-        os.system("clear")
         print("")      
         print("CONSULTAS SQL")
         print("")
