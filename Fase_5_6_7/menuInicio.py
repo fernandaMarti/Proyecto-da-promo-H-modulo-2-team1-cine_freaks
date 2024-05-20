@@ -22,12 +22,12 @@ def logo_inicio():
     print("   ####    ####    ##   ##  #######  ##   ##  #######  ##  ##    ####    #### ##  ##  ##     ####    ####")
     
 
-def menuPrincipal():
+def menuPrincipal():   #Este es el menú principal donde podemos controlar todas las opciones de nuestro menú.
     
     os.system("clear")
     continuar =True
     while continuar:
-        opcionCorrecta =False
+        opcionCorrecta =False   # Se ejecutará hasta que el usuario presione la opción 9 para salir.
         
         while not opcionCorrecta:
             logo_inicio()
@@ -59,7 +59,7 @@ def menuPrincipal():
                 opcionCorrecta=True
                 llamarOpcionCorrecta(opcion)
                 
-def llamarOpcionCorrecta(opcion):
+def llamarOpcionCorrecta(opcion):  #Esta función nos permite llamar a las funciones que realizan las acciones seleccionadas por el usuario.
     dao = DAO ()
     api = API()
     if opcion == 1:

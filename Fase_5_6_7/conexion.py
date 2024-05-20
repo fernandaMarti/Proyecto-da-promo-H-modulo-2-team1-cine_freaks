@@ -24,25 +24,25 @@ class DAO:
             print("Error al intentar realizar la consulta: {0}".format(ex))
                    
     
-    def listaPeliculas(self):
+    def listaPeliculas(self):   #Esta función nos hace la lista de las peliculas cuando la llamamos desde el menú principal
         
-        self.conexion.database = 'cinemextract'
+        self.conexion.database = 'cinemextract' #Nos conectamos a la base de datos
         if self.conexion.is_connected():
             try:
                 cursor =self.conexion.cursor()
                 cursor.execute("SELECT * FROM moviesdataset ORDER BY id_pelicula ASC")
-                resultados=cursor.fetchall()
+                resultados=cursor.fetchall()  #Nos devuelve todos los valores que se obtiene del select.
                 cursor.close
                 
                 return resultados
                 
             except Error as ex:
                                
-                print("Error al intentar realizar la consulta: {0}".format(ex))
+                print("Error al intentar realizar la consulta: {0}".format(ex))  #En el caso de error nos dice que ha ocurrido.
                 
-        self.conexion.close()
+        self.conexion.close()  #Cerramos la conexión
                 
-    def altaPelicula(self, pelicula):
+    def altaPelicula(self, pelicula):  #Esta función nos permite dar de alta una pelicula
         
         self.conexion.database = 'cinemextract'
         
@@ -131,8 +131,8 @@ class DAO:
                 
             
                 # Comprobar si la base de datos existe
-                cursor.execute("SHOW TABLES")
-                tablas = cursor.fetchall()
+                cursor.execute("SHOW TABLES")  
+                tablas = cursor.fetchall()      #Nos muestra todas las tablas que existen en la base de datos.
                
                 
                 if ('moviesdataset',) in tablas:
@@ -214,7 +214,7 @@ class API:
         
         #Metemos los datos de la fase 1
         
-        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase1.csv"  #Desde esta url obtenemos el csv de donde extraemos los datos.
         
         data_pelis =pd.read_csv(url)
         
@@ -249,7 +249,7 @@ class API:
         
         #Metemos los datos de la fase 2
         
-        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase2.csv"
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase2.csv" #Desde esta url obtenemos el csv de donde extraemos los datos.
         
         data_detalle_pelis =pd.read_csv(url)
         
@@ -292,22 +292,17 @@ class API:
                 
         #Metemos los datos de la fase 3
         
-        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase3.csv"
-        
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase3.csv"  #Desde esta url obtenemos el csv de donde extraemos los datos.
+         
         data_actores =pd.read_csv(url)
         
-        #data_actores.fillna('N/A', inplace=True)
+        
         data_actores['anno_nacimiento'].fillna(0, inplace=True)
         data_actores['premios'].fillna(0, inplace=True)
         
         data_actores.info()
-             
-        #print(data_actores)
-                
+                            
         lista_actores=[tuple(i) for i in data_actores.values]
-        #print(lista_actores)
-        
-        #df_fase3=pd.DataFrame(lista_actores)
         
         if self.conexion.is_connected():
             
@@ -330,7 +325,7 @@ class API:
     
         #Metemos los datos de la fase 4
         
-        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase4.csv"
+        url ="https://raw.githubusercontent.com/fernandaMarti/Proyecto-da-promo-H-modulo-2-team1-cine_freaks/main/Fase4.csv" #Desde esta url obtenemos el csv de donde extraemos los datos.
         
         data_oscars =pd.read_csv(url)
         
@@ -396,10 +391,10 @@ class API:
                 print(err)
         
                 
-        #Rellenamos la tabla intermedia:
+        #Rellenamos la tabla intermedia: Esta función no está implementada en esta versión del proyecto.
         
         def insertar_datos_tabla_int_pelis_actores():
-            try:
+            '''try:
                 # Conexión a la base de datos
                 conexion = mysql.connector.connect(user='root', password='tu_contraseña', host='localhost', port='3306', database='cinemextract')
                 cursor = conexion.cursor()
@@ -412,14 +407,7 @@ class API:
                 datos_peliculas = pd.read_csv(url)
 
                 # Insertar datos en la tabla intermedia
-                for dato_actor in datos_actores:
-                    for dato_pelicula in datos_peliculas:
-                        sql_insert = "INSERT INTO int_pelis_actores (id_actor, id_pelicula) VALUES (%s, %s)"
-                        valores = (dato_actor[0], dato_pelicula[4])  # Suponiendo que el ID del actor está en la primera columna y el ID de la película está en la primera columna
-                        cursor.execute(sql_insert, valores)
-
-                conexion.commit()
-                print("Datos insertados correctamente en la tabla intermedia.")
+                
 
             except Error as e:
                 print("Error al insertar datos en la tabla intermedia:", e)
@@ -428,10 +416,10 @@ class API:
             finally:
                 if conexion.is_connected():
                     cursor.close()
-                    conexion.close()
+                    conexion.close()'''
     
     
-    def hacer_consulta(self):
+    def hacer_consulta(self):     #Esta función nos permite listar las consultas que podemos realiazar en la BBDD y obtener una opción del usuario.
         
         cnx = mysql.connector.connect(user='root', password='AlumnaAdalab',
                               host='127.0.0.1', database='cinemextract')
@@ -455,7 +443,7 @@ class API:
         return int(input("Introduzca la consulta que quiere realizar introduciendo el numero de consulta: "))
         
             
-    def mi_sql(self,seleccion):
+    def mi_sql(self,seleccion):  #Esta función nos permite realizar la consulta en la BBDD y nos devuelve la consulta seleccionada en la base de datos para pasarlo a la función respuesta.
         
         cnx = mysql.connector.connect(user='root', password='AlumnaAdalab',
                               host='127.0.0.1', database='cinemextract')

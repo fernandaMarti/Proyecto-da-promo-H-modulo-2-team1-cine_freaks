@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 
-def listarPeliculas(peliculas):  
+def listarPeliculas(peliculas):   #Función que hace un listado de todas las peliculas.
     
     print("Peliculas: ")
             
@@ -14,7 +14,7 @@ def listarPeliculas(peliculas):
     print(" ")   
             
 
-def pedirDatosPelicula ():
+def pedirDatosPelicula (): #Función que pide los datos de la película al usuario.
    
     print("Introduzca los siguientes datos de la película")
     
@@ -33,7 +33,7 @@ def pedirDatosPelicula ():
     return pelicula
 
 
-def pedirDatosPeliModificar(peliculas):
+def pedirDatosPeliModificar(peliculas):  #Pide al usuario el codigo de la pelicula a modificar.
     listarPeliculas(peliculas)  
 
     codigoPeliEditar = input("Por favor, introduzca el id_pelicula de la pelicula a modificar (ttxxxxxxx): ")
@@ -58,7 +58,7 @@ def pedirDatosPeliModificar(peliculas):
 
     
 
-def pedirDatosPeliEliminar(peliculas):
+def pedirDatosPeliEliminar(peliculas):   #Pide al usuario el código de la pelicula a eliminar.
     
     listarPeliculas(peliculas)
     
